@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PetStatus {
+  AVAILABLE
+  ADOPTED
+  INPROCESS
+}
+
+enum PetSize {
+  UNDEFINED
+  SMALL
+  MEDIUM
+  BIGGER
+}
+
+enum PetPersonality {
+  UNDEFINED
+  CALM 
+  PLAYFUL 
+  INDEPENDENT
+}
+
+model Pet {
+  id              String            @id @default(uuid())
+  name            String            @db.VarChar(255)
+  specie          String            @db.VarChar(150)
+  dob             DateTime          @db.Date
+  description     String            @db.VarChar(255)
+
+  status          PetStatus         @default(AVAILABLE)
+  size            PetSize           @default(UNDEFINED)
+  personality     PetPersonality    @default(UNDEFINED)
+
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @default(now())
+
+  @@map("pet")
+  Adoption Adoption?              // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id              String            @id @default(uuid())
+  name            String            @db.VarChar(255)
+  email           String            @db.VarChar(255)
+  phone           String            @db.VarChar(40)
+  address         String            @db.VarChar(255)
+  
+  password        String            @db.VarChar(255)
+  role            Role              @default(USER)
+
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @default(now()) 
+
+  @@map("user")
+  Adoption Adoption[]             // Um usuário pode realizar várias adoções
+}
+
+model Adoption {
+  id              String            @id @default(uuid())
+  adoptionDate    DateTime          @db.Date @map("adoption_date")
+
+  petId           String            @unique @map("pet_id")
+  pet             Pet               @relation(fields: [petId], references: [id])
+
+  userId          String            @map("user_id")
+  user            User              @relation(fields: [userId], references: [id])
+
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @default(now())
+
+  @@map("adoption")
+}
