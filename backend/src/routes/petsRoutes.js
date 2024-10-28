@@ -1,11 +1,10 @@
-import { PetController } from "../controllers/petController"
+import { Router } from "express";
+import { PetController } from "../controllers/petController.js";
 
+const routes = Router();
 const petController = new PetController();
 
-export function petsRoutes(router) {
-    
-    router.get('/pet/:id', petController.getById);
-    router.post('/pet/:id', petController.insertPet);
-    // router.get('/pet/:id', petController.getById);
+routes.get("/", petController.getAll);
+routes.post("/", petController.create);
 
-}
+export { routes as petsRoutes };
