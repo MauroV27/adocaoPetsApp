@@ -22,27 +22,28 @@ enum PetSize {
 
 enum PetPersonality {
   UNDEFINED
-  CALM 
-  PLAYFUL 
+  CALM
+  PLAYFUL
   INDEPENDENT
 }
 
 model Pet {
-  id              String            @id @default(uuid())
-  name            String            @db.VarChar(255)
-  specie          String            @db.VarChar(150)
-  dob             DateTime          @db.Date
-  description     String            @db.VarChar(255)
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(255)
+  specie      String   @db.VarChar(150)
+  dob         DateTime @db.Date
+  description String   @db.VarChar(255)
 
-  status          PetStatus         @default(AVAILABLE)
-  size            PetSize           @default(UNDEFINED)
-  personality     PetPersonality    @default(UNDEFINED)
+  status      PetStatus      @default(AVAILABLE)
+  size        PetSize        @default(UNDEFINED)
+  personality PetPersonality @default(UNDEFINED)
 
-  created_at      DateTime          @default(now())
-  updated_at      DateTime          @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 
-  @@map("pet")
-  Adoption Adoption?              // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
+  Adoption Adoption? // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
+
+  @@map("pets")
 }
 
 enum Role {
@@ -51,34 +52,35 @@ enum Role {
 }
 
 model User {
-  id              String            @id @default(uuid())
-  name            String            @db.VarChar(255)
-  email           String            @db.VarChar(255)
-  phone           String            @db.VarChar(40)
-  address         String            @db.VarChar(255)
-  
-  password        String            @db.VarChar(255)
-  role            Role              @default(USER)
+  id      String @id @default(uuid())
+  name    String @db.VarChar(255)
+  email   String @db.VarChar(255)
+  phone   String @db.VarChar(40)
+  address String @db.VarChar(255)
 
-  created_at      DateTime          @default(now())
-  updated_at      DateTime          @default(now()) 
+  password String @db.VarChar(255)
+  role     Role   @default(USER)
 
-  @@map("user")
-  Adoption Adoption[]             // Um usuário pode realizar várias adoções
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  Adoption Adoption[] // Um usuário pode realizar várias adoções
+
+  @@map("users")
 }
 
 model Adoption {
-  id              String            @id @default(uuid())
-  adoptionDate    DateTime          @db.Date @map("adoption_date")
+  id           String   @id @default(uuid())
+  adoptionDate DateTime @map("adoption_date") @db.Date
 
-  petId           String            @unique @map("pet_id")
-  pet             Pet               @relation(fields: [petId], references: [id])
+  petId String @unique @map("pet_id")
+  pet   Pet    @relation(fields: [petId], references: [id])
 
-  userId          String            @map("user_id")
-  user            User              @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
 
-  created_at      DateTime          @default(now())
-  updated_at      DateTime          @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 
-  @@map("adoption")
+  @@map("adoptions")
 }
