@@ -1,4 +1,4 @@
-import { prisma } from "../libs/prismaClient.js";
+import { prismaClient } from "../database/prismaClient.js";
 
 export class PetController {
   async create(req, res) {
@@ -6,7 +6,7 @@ export class PetController {
       const { name, specie, dob, description, status, size, personality } =
         req.body;
 
-      const pet = await prisma.pet.create({
+      const pet = await prismaClient.pet.create({
         data: {
           name,
           specie,
@@ -27,7 +27,7 @@ export class PetController {
 
   async getAll(req, res) {
     try {
-      const pets = await prisma.pet.findMany({
+      const pets = await prismaClient.pet.findMany({
         select: {
           id: true,
           name: true,
