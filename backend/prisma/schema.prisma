@@ -27,6 +27,12 @@ enum PetPersonality {
   INDEPENDENT
 }
 
+enum PetGender {
+  UNDEFINED
+  MALE
+  FEMALE
+}
+
 model Pet {
   id          String   @id @default(uuid())
   name        String   @db.VarChar(255)
@@ -34,14 +40,17 @@ model Pet {
   dob         DateTime @db.Date
   description String   @db.VarChar(255)
 
-  status      PetStatus      @default(AVAILABLE)
-  size        PetSize        @default(UNDEFINED)
-  personality PetPersonality @default(UNDEFINED)
+  breed           String?           @db.VarChar(150)
+  gender          PetGender         @default(UNDEFINED)
+
+  status          PetStatus         @default(AVAILABLE)
+  size            PetSize           @default(UNDEFINED)
+  personality     PetPersonality    @default(UNDEFINED)
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
-  Adoption Adoption? // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
+  Adoption Adoption?                // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
 
   @@map("pets")
 }
@@ -52,19 +61,19 @@ enum Role {
 }
 
 model User {
-  id      String @id @default(uuid())
-  name    String @db.VarChar(255)
-  email   String @db.VarChar(255)
-  phone   String @db.VarChar(40)
-  address String @db.VarChar(255)
+  id              String            @id @default(uuid())
+  name            String            @db.VarChar(255)
+  email           String            @db.VarChar(255)
+  phone           String            @db.VarChar(40)
+  address         String            @db.VarChar(255)
+  
+  password        String            @db.VarChar(255)
+  role            Role              @default(USER)
 
-  password String @db.VarChar(255)
-  role     Role   @default(USER)
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @default(now()) 
 
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-
-  Adoption Adoption[] // Um usuário pode realizar várias adoções
+  Adoption Adoption[]               // Um usuário pode realizar várias adoções
 
   @@map("users")
 }
