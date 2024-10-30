@@ -4,7 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/server.js"
+    "start": "node ./src/server.js",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev --name "
   },
   "keywords": [],
   "author": "",

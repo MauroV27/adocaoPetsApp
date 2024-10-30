@@ -22,9 +22,15 @@ enum PetSize {
 
 enum PetPersonality {
   UNDEFINED
-  CALM 
-  PLAYFUL 
+  CALM
+  PLAYFUL
   INDEPENDENT
+}
+
+enum PetGender {
+  UNDEFINED
+  MALE
+  FEMALE
 }
 
 model Pet {
@@ -34,6 +40,9 @@ model Pet {
   dob             DateTime          @db.Date
   description     String            @db.VarChar(255)
 
+  breed           String?           @db.VarChar(150)
+  gender          PetGender         @default(UNDEFINED)
+
   status          PetStatus         @default(AVAILABLE)
   size            PetSize           @default(UNDEFINED)
   personality     PetPersonality    @default(UNDEFINED)
@@ -41,8 +50,9 @@ model Pet {
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now())
 
-  @@map("pet")
-  Adoption Adoption?              // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
+  Adoption Adoption?                // Um pet só pode ser adotado uma vez, regra de negocio não está considerando devoluções
+  
+  @@map("pets")
 }
 
 enum Role {
@@ -63,8 +73,9 @@ model User {
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now()) 
 
-  @@map("user")
-  Adoption Adoption[]             // Um usuário pode realizar várias adoções
+  Adoption Adoption[]               // Um usuário pode realizar várias adoções
+  
+  @@map("users")
 }
 
 model Adoption {
@@ -80,5 +91,5 @@ model Adoption {
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now())
 
-  @@map("adoption")
+  @@map("adoptions")
 }
