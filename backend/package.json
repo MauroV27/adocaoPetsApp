@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --watch ./src/server.js"
+    "start": "node --watch ./src/server.js",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev --name "
   },

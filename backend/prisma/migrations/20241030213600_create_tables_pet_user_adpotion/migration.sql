@@ -8,6 +8,9 @@ CREATE TYPE "PetSize" AS ENUM ('UNDEFINED', 'SMALL', 'MEDIUM', 'BIGGER');
 CREATE TYPE "PetPersonality" AS ENUM ('UNDEFINED', 'CALM', 'PLAYFUL', 'INDEPENDENT');
 
 -- CreateEnum
+CREATE TYPE "PetGender" AS ENUM ('UNDEFINED', 'MALE', 'FEMALE');
+
+-- CreateEnum
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
 -- CreateTable
@@ -17,6 +20,8 @@ CREATE TABLE "pets" (
     "specie" VARCHAR(150) NOT NULL,
     "dob" DATE NOT NULL,
     "description" VARCHAR(255) NOT NULL,
+    "breed" VARCHAR(150),
+    "gender" "PetGender" NOT NULL DEFAULT 'UNDEFINED',
     "status" "PetStatus" NOT NULL DEFAULT 'AVAILABLE',
     "size" "PetSize" NOT NULL DEFAULT 'UNDEFINED',
     "personality" "PetPersonality" NOT NULL DEFAULT 'UNDEFINED',
