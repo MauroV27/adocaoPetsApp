@@ -1,0 +1,313 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "AdoçãoTech",
+    "description": "API para gerenciar o processo de adoção de animais."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    },
+    {
+      "url": "https://localhost:3000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "Endpoints related to users"
+    },
+    {
+      "name": "Pets",
+      "description": "Endpoints related to pets"
+    },
+    {
+      "name": "Adopt",
+      "description": "Endpoints related to adoptions."
+    }
+  ],
+  "paths": {
+    "/user/{id}": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/singup": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Get all pets.",
+        "description": "Endpoint to get all pets.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Create a new pet.",
+        "description": "Endpoint to create a new pet.",
+        "responses": {
+          "201": {
+            "description": "User registered successfully."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "specie": {
+                    "example": "any"
+                  },
+                  "breed": {
+                    "example": "any"
+                  },
+                  "gender": {
+                    "example": "any"
+                  },
+                  "dob": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "size": {
+                    "example": "any"
+                  },
+                  "personality": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Rex"
+                  }
+                }
+              },
+              "specie": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Dog"
+                  }
+                }
+              },
+              "breed": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Labrador"
+                  }
+                }
+              },
+              "gender": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "enum": {
+                    "type": "array",
+                    "example": [
+                      "AVAILABLE",
+                      "ADOPTED",
+                      "INPROCESS"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "AVAILABLE"
+                  }
+                }
+              },
+              "dob": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "2019-01-01"
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Friendly and playful"
+                  }
+                }
+              },
+              "size": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "enum": {
+                    "type": "array",
+                    "example": [
+                      "UNDEFINED",
+                      "SMALL",
+                      "MEDIUM",
+                      "BIGGER"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "MEDIUM"
+                  }
+                }
+              },
+              "personality": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Playful and loving"
+                  }
+                }
+              }
+            }
+          },
+          "required": {
+            "type": "array",
+            "example": [
+              "name",
+              "specie",
+              "breed",
+              "gender",
+              "dob",
+              "description",
+              "size",
+              "personality"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
