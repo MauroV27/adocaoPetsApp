@@ -4,16 +4,9 @@ export async function promoteUserToAdmin(req, res){
 
     // Validate request body
     const { promoteId } = req.body;
-    const { id } = req.token.data;
 
-    // 1. Check if user(mail, passowrd) has role of ADMIN
-    const currentUser = await prismaClient.user.findUnique({
-        where: { id },
-    });
-
-    if (!currentUser || currentUser.role !== 'ADMIN') {
-        return res.status(403).json({ error: 'Unauthorized' });
-    }
+    // 1, Get user account by JWT auth if user.role == ADMIN
+    const currentUser = req.user;
 
     // 2. Try to convert user with promoteId in ADMIN 
     //  2.1 If promoteId is a valid user, so promote to ADMIN

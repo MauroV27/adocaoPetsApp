@@ -1,6 +1,6 @@
 import { prismaClient } from "../../database/prismaClient.js";
 import { compare } from "../../security/crypt.js";
-import { createJWTToken } from "../../security/jwt-midleware.js";
+import { createJWTToken } from "../../security/jwt-middleware.js";
 
 export async function login(req, res) {
     /**

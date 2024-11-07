@@ -8,26 +8,28 @@ export async function getById(req, res) {
     */
 
     const userId = req.params.id;
-    const { id } = req.token.data;
+    const { id } = req.user;
+    const { access } = req.access;
 
-    const responseBody = ( id == userId ) ? {
-        id: true,
-        name: true,
-        address: true, 
-        phone: true, 
-        email: true, 
-        role: true, 
-        Adoption: true        
-    } : {
-        id: true,
-        name: true
+    if ( access != "ADMIN" && id != userId ){
+        return res.status(403).json({
+            message : "Unauthorized access"
+        })
     }
 
     const response = await prismaClient.user.findUnique({
         where : {
             id : userId
         },
-        select : responseBody
+        select : {
+            id: true,
+            name: true,
+            address: true, 
+            phone: true, 
+            email: true, 
+            role: true, 
+            Adoption: true      
+        }
     })
         .then( user => {
             return res.status(201).json({
