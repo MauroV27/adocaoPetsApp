@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { create, getById, login, promoteUserToAdmin } from "../controllers/userController.js";
+import { create, getById, login, promoteUserToAdmin } from "../controllers/user/controller.js";
+import { authAdminMiddleware, authMiddleware } from '../security/jwt-middleware.js';
 
 const routes = Router();
 
-routes.get('/user/:id', getById);
 routes.post('/singup', create);
 routes.post('/login', login);
 
-routes.post('/user/promote', promoteUserToAdmin);
+routes.get('/user/:id', authMiddleware, getById);
+routes.post('/user/promote', authAdminMiddleware, promoteUserToAdmin);
 
 export { routes as usersRoutes }; 
