@@ -21,6 +21,24 @@ function getToken(req) {
     return null;
 }
 
+async function getUserInToke( id ) {
+    
+    const currentUser = await prismaClient.user.findUnique({
+        where: { id },
+    })
+        .then( user => { 
+            return user 
+        })
+        .catch( error => {
+            // TODO : Handle error message
+            return res.status(500).json({
+                message : error
+            })
+        });
+
+    return currentUser;    
+}
+
 export async function authAdminMiddleware(req, res, next) {
     const token = getToken(req);
 
@@ -33,18 +51,7 @@ export async function authAdminMiddleware(req, res, next) {
         const decoded = verify(token, JWT_SECRET);
         const { id } = decoded.data;
 
-        const currentUser = await prismaClient.user.findUnique({
-            where: { id },
-        })
-            .then( user => { 
-                return user 
-            })
-            .catch( error => {
-                // TODO : Handle error message
-                return res.status(500).json({
-                    message : error
-                })
-            })
+        const currentUser = await getUserInToke( id );
 
         if (!currentUser || currentUser.role !== 'ADMIN') {
             return res.status(403).json({ message: 'User Unauthorized' });
@@ -58,24 +65,8 @@ export async function authAdminMiddleware(req, res, next) {
     }
 }
 
-export function authOrPassMidlewware(req, res, next) {
-    const token = getToken(req);
-    
-    let decoded = { data : null };
 
-    try {
-        // Verifica o token JWT
-        decoded = verify(token, JWT_SECRET);
-    } catch (error) {
-        decoded = { data : null };
-    }
-
-    req.token = decoded;
-    next();
-}
-
-
-export async function authUserOrAdminMidlewware(req, res, next) {
+export async function authUserOrAdminMiddleware(req, res, next) {
     const token = getToken(req);
 
     if (!token) {
@@ -87,16 +78,7 @@ export async function authUserOrAdminMidlewware(req, res, next) {
         const decoded = verify(token, JWT_SECRET);
         const { id } = decoded.data;
 
-        const currentUser = await prismaClient.user.findUnique({
-            where: { id },
-        })
-            .then( user => user)
-            .catch( error => {
-                // TODO : Handle error message
-                return res.status(500).json({
-                    message : error
-                })
-            })
+        const currentUser = await getUserInToke( id );
 
         if (!currentUser || currentUser.role === 'ADMIN') {
             req.access = "ADMIN";
