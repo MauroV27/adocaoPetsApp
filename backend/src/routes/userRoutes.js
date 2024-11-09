@@ -1,11 +1,13 @@
-import { UserController } from "../controllers/userController";
+import { Router } from "express";
+import { create, getById, login, promoteUserToAdmin } from "../controllers/user/controller.js";
+import { authAdminMiddleware, authMiddleware } from '../security/jwt-middleware.js';
 
-const userController = new UserController();
+const routes = Router();
 
-export function userRoutes( router ){
+routes.post('/singup', create);
+routes.post('/login', login);
 
-    router.get('/user/:id', userController.getById);
-    router.post('/singup', userController.insertUser);
-    router.post('/login', userController.validateLogin);
+routes.get('/user/:id', authMiddleware, getById);
+routes.post('/user/promote', authAdminMiddleware, promoteUserToAdmin);
 
-} 
+export { routes as usersRoutes }; 
