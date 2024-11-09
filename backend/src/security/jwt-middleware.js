@@ -66,7 +66,7 @@ export async function authAdminMiddleware(req, res, next) {
 }
 
 
-export async function authUserOrAdminMiddleware(req, res, next) {
+export async function authMiddleware(req, res, next) {
     const token = getToken(req);
 
     if (!token) {
