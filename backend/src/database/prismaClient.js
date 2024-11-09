@@ -1,5 +1,16 @@
-import { PrismaClient } from "@prisma/client";
+let prismaClient;
 
-const prismaClient = new PrismaClient();
+async function initializePrisma() {
+  if (process.env.NODE_ENV === "test") {
+    return await import("prismock").then( mod => {
+            return new mod.PrismockClient();
+        });
+  } else {
+    return await import("@prisma/client").then((mod) => {
+      return new mod.PrismaClient();
+    });
+  }
+}
 
+prismaClient = initializePrisma();
 export { prismaClient };

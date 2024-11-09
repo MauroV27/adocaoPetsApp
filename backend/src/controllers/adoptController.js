@@ -1,13 +1,14 @@
+import prismaClient from "../database/prismaClient.js";
+
+
 export class AdoptController {
+  async getById(req, res) {}
 
-    async getById(req, res){}
+  async insertAdopt(req, res) {}
 
-    async insertAdopt(req, res){}
+  async updateAdopt(req, res) {}
 
-    async updateAdopt(req, res){}
+  async deleteAdopt(req, res) {}
 
-    async deleteAdopt(req, res){}
-
-    async validateLogin(req, res){}
-
+  async validateLogin(req, res) {}
 }
