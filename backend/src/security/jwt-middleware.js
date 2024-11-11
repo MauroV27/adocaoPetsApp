@@ -1,7 +1,8 @@
 import pkg from 'jsonwebtoken';
 const { verify, sign } = pkg;
 
-import { prismaClient } from "../database/prismaClient.js";
+import { PrismaClient } from "@prisma/client";
+const prismaClient = new PrismaClient();
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
@@ -26,16 +27,11 @@ async function getUserInToke( id ) {
     const currentUser = await prismaClient.user.findUnique({
         where: { id },
     })
-        .then( user => { 
-            return user 
-        })
-        .catch( error => {
-            // TODO : Handle error message
-            return res.status(500).json({
-                message : error
-            })
-        });
-
+    .then( user => { return user })
+    .catch( error => {
+        // TODO : Handle error message
+        return res.status(500).json({ message : error.message })
+    });
     return currentUser;    
 }
 
