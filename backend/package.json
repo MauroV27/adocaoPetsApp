@@ -4,10 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --watch ./src/server.js",
+    "start": "cross-env NODE_ENV=development node --watch ./src/server.js",
     "seed": "node ./prisma/seed.js",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev --name ",
+    "swagger": "cross-env NODE_ENV=development node ./docs/swagger.js",
     "test": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
