@@ -72,12 +72,10 @@ const doc = {
 };
 
 const outputFile = "./swagger-output.json";
-const routes = ["../src/routes/userRoutes.js", "../src/routes/petsRoutes.js"];
-import express from "express";
-const app = express();
-
-
+const routes = ["../src/routes/*.js"];
+import { app } from "../src/app.js";
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 swaggerAutogenInstance(outputFile, routes, doc).then(async () => {
   await import("../src/server.js");
 });
