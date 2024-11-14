@@ -12,7 +12,7 @@ export async function promoteUserToAdmin(req, res) {
     });
   
     if (!userToPromote) {
-      return res.status(404).json({ error: "User to promote not found" });
+      return res.status(404).json({ message: "User to promote not found", error: true });
     }
   
     // 2. Promote the user to ADMIN
