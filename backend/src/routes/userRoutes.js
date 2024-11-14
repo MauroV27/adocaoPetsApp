@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, getById, login, promoteUserToAdmin, getAll, update, deleteUser } from "../controllers/userController.js";
+import { create, getById, login, promoteUserToAdmin, getAll, update, deleteUser } from "../controllers/user/controller.js";
 import { authAdminMiddleware, authMiddleware } from '../security/jwt-middleware.js';
 
 const routes = Router();
