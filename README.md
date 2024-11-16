@@ -15,9 +15,7 @@ AdoçãoTech é um sistema de gerenciamento de adoção de pets, desenvolvido co
 *   [Funcionalidades](#funcionalidades)
 *   [Estrutura do Projeto](#estrutura-do-projeto)
 *   [Como Rodar a API](#como-rodar-a-api)
-*   [Pré\-requisitos](#pr%C3%A9-requisitos)
-*   [Verificar Instalação do Docker](#verificar-instala%C3%A7%C3%A3o-do-docker)
-*   [Configuração do Ambiente](#configura%C3%A7%C3%A3o-do-ambiente)
+*   [Melhorias Futuras](#melhorias-futuras)
 
 * * *
 
