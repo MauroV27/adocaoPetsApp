@@ -1,8 +1,6 @@
 import { compare, hash } from "../security/crypt.js";
 import { createJWTToken } from "../security/jwt-middleware.js";
-import { PrismaClient } from "@prisma/client";
-
-const prismaClient = new PrismaClient();
+import { prismaClient } from "../database/prismaClient.js";
 
 export async function create(req, res) {
   // TODO : add validation to req.body data
