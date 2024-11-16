@@ -4,7 +4,7 @@ import { authAdminMiddleware } from '../security/jwt-middleware.js';
 
 const routes = Router();
 
-routes.post("/pets", create);
+routes.post("/pets", authAdminMiddleware, create);
 routes.get("/pets/:id", getPetById);
 routes.get("/pets", getAll);
 routes.put("/pets/:id", authAdminMiddleware, update);
