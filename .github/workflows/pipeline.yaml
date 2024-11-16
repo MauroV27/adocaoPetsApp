@@ -24,7 +24,6 @@ jobs:
         run: npm test
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      ALGORITHM: ${{ secrets.ALGORITHM }}
-      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      JWT_SECRET_KEY: 'senha-secreta'
+      ADMIN_PASSWORD: '123456'
+      ADMIN_EMAIL: 'adm@adm.com'
