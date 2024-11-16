@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-const prismaClient = new PrismaClient();
+
+import { prismaClient } from "../database/prismaClient.js";
 
 export function create(req, res) {
   const { name, specie, dob, description, breed, gender, size, personality } = req.body;
@@ -16,7 +16,7 @@ export function create(req, res) {
       size,
       personality
     },
-    select: { id: true, name: true, specie: true, dob: true, description: true, breed: true, gender: true, status: true, size: true, personality: true }
+    select: { id: true, name: true, specie: true, dob: true, description: true, breed: true, gender: true, status: true, size: true, personality: true, created_at: true, updated_at: true }
   })
   .then(newPet => res.status(201).json({ message: "Pet created successfully", pet: newPet }))
   .catch(error => res.status(500).json({ error: error.message }));
@@ -54,9 +54,8 @@ export function getAll(req, res) {
     select: { id: true, name: true, specie: true, dob: true, description: true, breed: true, gender: true, status: true, size: true, personality: true }
   })
   .then(pets => {
-    if (pets > 0) {
-      console.log("pets", pets);
-      res.status(200).json(pets);
+    if (pets.length > 0) {
+      res.status(200).json({pets: pets});
     } else {
       res.status(404).json({ message: "No pets found" });
     }
@@ -94,6 +93,6 @@ export function deletePet(req, res) {
   prismaClient.pet.delete({
     where: { id }
   })
-  .then(() => res.status(204).json({ message: "Pet deleted successfully" }))
+  .then(() => res.status(200).json({ message: "Pet deleted successfully." }))
   .catch(error => res.status(500).json({ error: error.message }));
 }
