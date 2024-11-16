@@ -1,8 +1,7 @@
 import pkg from 'jsonwebtoken';
 const { verify, sign } = pkg;
 
-import { PrismaClient } from "@prisma/client";
-const prismaClient = new PrismaClient();
+import { prismaClient } from "../database/prismaClient.js";
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
@@ -46,7 +45,7 @@ export async function authAdminMiddleware(req, res, next) {
 
         const decoded = verify(token, JWT_SECRET);
         const { id } = decoded.data;
-
+        
         const currentUser = await getUserInToke( id );
 
         if (!currentUser || currentUser.role !== 'ADMIN') {
@@ -91,5 +90,5 @@ export async function authMiddleware(req, res, next) {
 }
 
 export function createJWTToken( data ){
-    return sign({ data }, JWT_SECRET);
+    return sign({ data }, JWT_SECRET, { expiresIn: '2h' });
 }
