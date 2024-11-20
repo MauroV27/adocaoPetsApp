@@ -1,0 +1,30 @@
+/* Colors in application */
+
+:root {
+    --primary : #25746F;
+    --secondary: #EF942B;
+    --background: #F8F1E5;
+    --surface: #F9DDA5;
+
+    --on-primary: #eee;
+    --on-secondary: #111;
+    --on-background: #111;
+    --on-surface: #111;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    font-size: 1em;
+    font-family: Arial;
+}
+
+html, body {
+    height: 100vh;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-background);
+}
