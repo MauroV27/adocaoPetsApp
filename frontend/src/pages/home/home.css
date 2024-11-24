@@ -13,18 +13,15 @@
 
 /* Hero Section : */
 
-/* .hero__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.hero__container {
     flex-direction: row;
     flex-wrap: wrap;
     padding: 20px;
     background-color: var(--surface);
-} */
+}
 
 .hero__content {
-    max-width: 40%;
+    max-width: 30%;
     text-align: left;
     padding: 20px;
     padding-right: 36px;
@@ -76,7 +73,6 @@ span.title__hero__emphasis {
 
 .adoption__benefits__container {
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    display: flex;
     flex-direction: column;
 }
 
@@ -89,14 +85,24 @@ span.title__hero__emphasis {
 }
 
 .adoption__benefits__container ul {
-    list-style-type: square;
+    /* list-style-type: square; */
     padding-left: 20px;
+    list-style : none;
 }
 
-.adoption__benefits__container li {
+.adoption__benefits__container li > span {
     margin: 10px 0;
     font-family: Arial, sans-serif;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--on-surface);
 }
+
+li .li-icon__style {
+    color: var(--primary);
+}
+
+
 
 /* Pets to adopt :  */
 
@@ -129,6 +135,7 @@ span.title__hero__emphasis {
 @media (max-width: 768px) {
     .card-grid {
         grid-template-columns: repeat(2, 1fr);
+        /* flex-direction: column; */
     }
 }
 

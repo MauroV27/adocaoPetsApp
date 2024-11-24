@@ -1,21 +1,22 @@
-import CardComponent from "../../components/card/card";
+import PetCardComponent from "../../components/pet-card/pet-card";
+import { FaPaw } from "react-icons/fa";
 import "./home.css";
 
 function HomePageComponent() {
 
-    const cards = [
-        { id: 1, image: 'https://via.placeholder.com/300', title: 'Card 1', description: 'Descrição do Card 1', link: "/pets" },
-        { id: 2, image: 'https://via.placeholder.com/300', title: 'Card 2', description: 'Descrição do Card 2', link: "/pets" },
-        { id: 3, image: 'https://via.placeholder.com/300', title: 'Card 3', description: 'Descrição do Card 3', link: "/pets" },
-        { id: 4, image: 'https://via.placeholder.com/300', title: 'Card 4', description: 'Descrição do Card 4', link: "/pets" },
-        { id: 5, image: 'https://via.placeholder.com/300', title: 'Card 5', description: 'Descrição do Card 5', link: "/pets" },
-        { id: 6, image: 'https://via.placeholder.com/300', title: 'Card 6', description: 'Descrição do Card 6', link: "/pets" },
+    const listPets = [
+        { id: 1, name:"Test 1", description: 'Descrição do Card 1', link: "/pets", specie: "CAT", gender: "MALE" },
+        { id: 2, name:"Test 2", description: 'Descrição do Card 2', link: "/pets", specie: "DOG", gender: "FEMALE" },
+        { id: 3, name:"Test 3", description: 'Descrição do Card 3', link: "/pets", specie: "BIRD", gender: "MALE" },
+        { id: 4, name:"Test 4", description: 'Descrição do Card 4', link: "/pets", specie: "CAT", gender: "FEMALE" },
+        { id: 5, name:"Test 5", description: 'Descrição do Card 5', link: "/pets", specie: "DOG", gender: "MALE" },
+        { id: 6, name:"Test 6", description: 'Descrição do Card 6', link: "/pets", specie: "CAT", gender: "MALE" },
     ];
 
     return (
         <div className="home__container">
             
-            <div className="hero__container section__container">
+            <div className="section__container hero__container">
                 <div className="hero__content">
                     <h1>Bem vindo(a) a <span className="title__hero__emphasis">Adoção Tech</span></h1>
                     <p>Conectando pessoas com adoráveis pets</p>
@@ -29,13 +30,25 @@ function HomePageComponent() {
                 </div>
             </div>
 
-            <div className="adoption__benefits__container section__container">
+            <div className="section__container adoption__benefits__container">
                 <h2>Benefícios da Adoção</h2>
                 <ul>
-                    <li>Proporciona um lar seguro e amoroso para animais resgatados</li>
-                    <li>Reduz o número de animais abandonados e em abrigos</li>
-                    <li>Enriquece a vida da família com companheirismo e lealdade</li>
-                    <li>Promove a saúde mental e o bem-estar através da interação com os animais</li> 
+                    <li>
+                        <FaPaw className="li-icon__style" />
+                        <span>Proporciona um lar seguro e amoroso para animais resgatados</span>
+                    </li>
+                    <li>
+                        <FaPaw className="li-icon__style" />
+                        <span>Reduz o número de animais abandonados e em abrigos</span>
+                    </li>
+                    <li>
+                        <FaPaw className="li-icon__style" />
+                        <span>Enriquece a vida da família com companheirismo e lealdade</span>
+                    </li>
+                    <li>
+                        <FaPaw className="li-icon__style" />
+                        <span>Promove a saúde mental e o bem-estar através da interação com os animais</span>
+                    </li> 
                 </ul>
             </div>
 
@@ -46,13 +59,10 @@ function HomePageComponent() {
                 </h2>
 
                 <div className="card-grid grid-3x2">
-                    {cards.map(card => (
-                        <CardComponent 
-                            key={card.id} 
-                            image={card.image} 
-                            title={card.title} 
-                            description={card.description} 
-                            link="/"
+                    {listPets.map(pet => (
+                        <PetCardComponent 
+                            key={pet.id} 
+                            pet={{...pet, link: "/"}}
                             />
                     ))}
                 </div>
