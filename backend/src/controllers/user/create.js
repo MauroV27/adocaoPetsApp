@@ -12,7 +12,7 @@ export async function create(req, res) {
     const { name, email, phone, address, password } = req.body;
     const hashedPassword = await hash(password, 10);
 
-    const response = await prismaClient.user.create({
+    await prismaClient.user.create({
         data : {
             name, 
             email,
@@ -36,7 +36,4 @@ export async function create(req, res) {
                 error
             });
         });
-
-    return response;
-
 }
