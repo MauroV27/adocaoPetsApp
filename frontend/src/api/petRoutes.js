@@ -35,16 +35,23 @@ export const getPetById  = async (id) => {
  * @param {string} size - Can be : UNDEFINED, SMALL, MEDIUM or BIGGER
  * @param {string} personality - Can be : UNDEFINED,  CALM, PLAYFUL or INDEPENDENT
  * @param {string} gender - Can be : UNDEFINED,  MALE,  FEMALE
+ * @param {string} status default = AVAILABLE - Can be : AVAILABLE, ADOPTED or INPROCESS
  * @returns {PetRespose[]} List with pets
 */
 export const getPets = async (
     limit = 10, 
     offset = 0, 
-    size = null, 
-    personality = null, 
-    gender = null
+    size = '', 
+    personality = '', 
+    gender = '', 
+    status = "AVAILABLE"
 ) => {
-    return await axios.get($`${baseURL}?limit=${limit}&offset=${offset}&size=${size}&personality=${personality}&gender=${gender}`);
+    
+    const urlBuilder = new URLSearchParams({
+        limit, offset, size, personality, gender, status
+    });
+
+    return await axios.get(`${baseURL}/pets?${urlBuilder.toString()}`);
 };
 
 
