@@ -44,10 +44,7 @@ export const getPets = async (
     personality = null, 
     gender = null
 ) => {
-    return await axios.get(
-        $`${baseURL}?limit=${limit}&offset=${offset}&size=${size}&personality=${personality}&gender=${gender}`,
-        data
-    );
+    return await axios.get($`${baseURL}?limit=${limit}&offset=${offset}&size=${size}&personality=${personality}&gender=${gender}`);
 };
 
 
