@@ -1,0 +1,146 @@
+.section__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: var(--surface);
+
+    margin-top: 32px;
+    box-shadow: 0 6px 20px 1px var(--primary);
+}
+
+/* Hero Section : */
+
+.hero__container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: var(--surface);
+}
+
+.hero__content {
+    max-width: 30%;
+    text-align: left;
+    padding: 20px;
+    padding-right: 36px;
+}
+
+.hero__content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-wrap: wrap;
+}
+
+span.title__hero__emphasis {
+    color: var(--primary);
+}
+
+.hero__content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--on-surface);
+}
+
+.hero__button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: var(--on-primary);
+    background-color: var(--primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hero__button:hover {
+    background-color: rgb(from var(--primary) r g b / 80%);
+}
+
+.hero__image {
+    max-width: 50%;
+    text-align: center;
+}
+
+.hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--primary);
+}
+
+/* Adoption benefits section : */
+
+.adoption__benefits__container {
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    flex-direction: column;
+}
+
+.section__container h2 {
+    font-size: 24pt;
+    color: var(--primary);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin-bottom: 12px;
+}
+
+.adoption__benefits__container ul {
+    /* list-style-type: square; */
+    padding-left: 20px;
+    list-style : none;
+}
+
+.adoption__benefits__container li > span {
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--on-surface);
+}
+
+li .li-icon__style {
+    color: var(--primary);
+}
+
+
+
+/* Pets to adopt :  */
+
+/* Grid geral para o card layout */
+
+.adoption__list__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-grid {
+    display: grid;
+    max-width: 1020px;
+    margin: auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Layout 3x2 (6 cartões) */
+.grid-3x2 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Layout para mais cartões */
+.grid-products {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* flex-direction: column; */
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}

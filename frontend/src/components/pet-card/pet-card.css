@@ -1,0 +1,66 @@
+.card__link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid rgb(from var(--primary) r g b / 60%) ;
+    border-radius: 10px;
+    max-width: 300px;
+    overflow: hidden;
+    background-color: var(--background);
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 4px 6px rgb(from var(--primary) r g b / 20%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 8px 12px rgb(from var(--primary) r g b / 40%);
+    border: 3px solid var(--primary);
+
+}
+
+
+.card-image {
+    width: 100%;
+    height: auto;
+}
+
+.card__content {
+    padding: 10px 15px;
+}
+
+
+.card__content__row {
+    display: flex;
+    flex-direction: row;
+    
+    align-items: left;
+    text-align: left;
+    justify-content: space-between;
+
+    color: var(--on-background);
+}
+
+.card__content__row:first-child {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.pet__data__description > span {
+    color: var(--primary);
+}
+
+.card__content__row p {
+    text-align: justify;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: var(--on-surface);
+}

@@ -1,0 +1,91 @@
+.filter-menu__container {
+    /* padding: 20px; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 10px; */
+    background-color: var(--surface);
+
+    margin: auto;
+}
+
+.filter-menu__container h2 {
+    font-size: 22pt;
+    color: var(--primary);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+.filter__list {
+    display: flex;
+    max-width: 80%;
+    align-items: center;
+    margin: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.filter__list > .filter__item{
+    flex: 1 1 0;
+    
+    min-width: 280px;
+    flex-wrap: nowrap;
+}
+
+.filter__group {
+    margin-right: 12px;
+    margin-bottom: 15px;
+    margin-left: 0;
+    
+    min-height: 40px;
+    max-height: 40px;
+    
+    text-align: left;
+}
+
+.filter__group label {
+    font-weight: bold;
+    margin-right: 12px;
+    min-width: 40%;
+}
+
+.filter__group select {
+    /* width: 120px; */
+    padding: 8px;
+    border: 1px solid var(--background);
+    background-color: var(--background);
+    border-radius: 5px;
+    height: 36px;
+}
+
+button.apply__filters {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 36px;
+    position: relative;
+    top: -8px;
+    
+    min-width: 200px;
+}
+
+.apply__filters:hover {
+    background-color: rgb(from var(--primary) r g b / 80%);
+}
+
+/* Responsividade da página wev */
+@media (max-width: 780px) {
+    
+    .filter__list {
+        flex-direction: column;
+    }
+
+    .filter__group {
+        justify-content: space-between;
+    }
+
+}
