@@ -22,7 +22,7 @@ function PetCardComponent({pet}) {
         "DOG" : "Cachorro",
         "BIRD" : "Pássaro",
         "RABBIT" : "Coelho",
-        "UNDEFINED" : `Animal do tipo : ${specie}`
+        "UNDEFINED" : `Animal da espécie : ${(specie + '').toLowerCase()}`
     }
 
     const genderIcon = {
@@ -34,7 +34,7 @@ function PetCardComponent({pet}) {
     const genderIconDescription = {
         "FEMALE" : "Fêmea",
         "MALE" : "Macho",
-        "UNDEFINED" : "Desconhecido"
+        "UNDEFINED" : "Sexo do pet é desconhecido"
     }
 
     // Placeholder images to represent pet specie
@@ -76,8 +76,7 @@ function PetCardComponent({pet}) {
                     </div>
 
                     <div className="card__content__row">
-                        {/* <p>{description}</p> */}
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</p>
+                        <p>{description}</p>
                     </div>
 
                 </div>
