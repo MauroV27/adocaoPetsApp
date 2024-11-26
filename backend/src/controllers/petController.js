@@ -96,3 +96,32 @@ export function deletePet(req, res) {
   .then(() => res.status(204).json({ message: "Pet deleted successfully" }))
   .catch(error => res.status(500).json({ error: error.message }));
 }
+
+
+export async function getSpecies(req, res) {
+  const { status } = req.query;
+
+  const filters = {};
+
+  if (status) {
+    if (status == "AVAILABLE" || status == "ADOPTED" || status == "INPROCESS") {
+      filters.status = status;
+    } else {
+      return res.status(404).json({ message: `Status ${status} not valid` })
+    }
+  }
+
+  const species = await prismaClient.pet.findMany({
+    distinct: ['specie'],
+    where: filters,
+    select: {
+      specie: true,
+    }
+  });
+
+  const uniqueSpecies = new Set(species.flatMap(({ specie }) => specie));
+
+  return res.status(200).json({
+    species: [...uniqueSpecies]
+  });
+}
