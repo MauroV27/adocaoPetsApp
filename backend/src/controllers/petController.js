@@ -1,4 +1,4 @@
-import { prismaClient } from "../database/prismaClient";
+import { prismaClient } from "../database/prismaClient.js";
 
 export function create(req, res) {
   const { name, specie, dob, description, breed, gender, size, personality } = req.body;
@@ -38,23 +38,24 @@ export function getPetById(req, res) {
   .catch(error => res.status(500).json({ error: error.message }));
 }
 
-export function getAll(req, res) {
-  const { limit = 10, offset = 0, size, personality, gender } = req.query;
+export async function getAll(req, res) {
+  const { limit = 10, offset = 0, size, personality, gender, status, specie } = req.query;
 
   const filters = {};
   if (size) filters.size = size;
   if (personality) filters.personality = personality;
   if (gender) filters.gender = gender;
+  if (specie) filters.specie = specie;
+  if (status) filters.status = status;
 
-  prismaClient.pet.findMany({
+  return await prismaClient.pet.findMany({
     skip: parseInt(offset),
     take: parseInt(limit),
     where: filters,
     select: { id: true, name: true, specie: true, dob: true, description: true, breed: true, gender: true, status: true, size: true, personality: true }
   })
   .then(pets => {
-    if (pets > 0) {
-      console.log("pets", pets);
+    if (pets.length > 0) {
       res.status(200).json(pets);
     } else {
       res.status(404).json({ message: "No pets found" });
@@ -95,4 +96,33 @@ export function deletePet(req, res) {
   })
   .then(() => res.status(204).json({ message: "Pet deleted successfully" }))
   .catch(error => res.status(500).json({ error: error.message }));
+}
+
+
+export async function getSpecies(req, res) {
+  const { status } = req.query;
+
+  const filters = {};
+
+  if (status) {
+    if (status == "AVAILABLE" || status == "ADOPTED" || status == "INPROCESS") {
+      filters.status = status;
+    } else {
+      return res.status(404).json({ message: `Status ${status} not valid` })
+    }
+  }
+
+  const species = await prismaClient.pet.findMany({
+    distinct: ['specie'],
+    where: filters,
+    select: {
+      specie: true,
+    }
+  });
+
+  const uniqueSpecies = new Set(species.flatMap(({ specie }) => specie));
+
+  return res.status(200).json({
+    species: [...uniqueSpecies]
+  });
 }

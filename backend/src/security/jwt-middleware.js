@@ -1,7 +1,7 @@
 import pkg from 'jsonwebtoken';
 const { verify, sign } = pkg;
 
-import { prismaClient } from '../database/prismaClient';
+import { prismaClient } from '../database/prismaClient.js';
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
