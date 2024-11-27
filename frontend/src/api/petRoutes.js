@@ -44,14 +44,28 @@ export const getPets = async (
     size = '', 
     personality = '', 
     gender = '', 
+    specie = '',
     status = "AVAILABLE"
 ) => {
     
     const urlBuilder = new URLSearchParams({
-        limit, offset, size, personality, gender, status
+        limit, offset, size, personality, gender, specie, status
     });
 
     return await axios.get(`${baseURL}/pets?${urlBuilder.toString()}`);
+};
+
+
+/**
+ * ## Get list of species
+ * @param {string} status default = AVAILABLE - Can be : AVAILABLE, ADOPTED or INPROCESSr
+ * @returns {Object}
+ */
+export const getSpecies = async (status = "AVAILABLE") => {
+
+    const urlBuilder = new URLSearchParams({status});
+
+    return await axios.get(`${baseURL}/pets/species?${urlBuilder.toString()}`);
 };
 
 

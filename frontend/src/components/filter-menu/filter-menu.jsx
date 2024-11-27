@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getPets } from '../../api/petRoutes.js';
+import { getPets, getSpecies } from '../../api/petRoutes.js';
 import "./filter-menu.css";
 
 function FilterMenuComponent({ onApplyFilters }) {
@@ -8,7 +8,23 @@ function FilterMenuComponent({ onApplyFilters }) {
     const [size, setSize] = useState(null);
     const [personality, setPersonality] = useState(null);
     const [gender, setGender] = useState(null);
+    
+    const [speciesList, setSpeciesList] = useState([]);
+    const [selectedSpecie, setSelectedSpecie] = useState("");
 
+    const loadSpeciesList = async () => {
+        const listSpecies = await getSpecies()
+            .then(resp => resp)
+            .catch( error => {
+                return null;
+            });
+
+        if ( listSpecies ){
+            const data = await listSpecies.data.species;
+            setSpeciesList([...data]);   
+        }   
+
+    };
     
     // Gerar a URL com os filtros aplicados
     const onGetData = async () => {
@@ -22,6 +38,7 @@ function FilterMenuComponent({ onApplyFilters }) {
             size || '',
             personality || '',
             gender || '', 
+            selectedSpecie || '' 
         ).then( resp => {
             return resp;
         }).catch( error => {
@@ -38,6 +55,7 @@ function FilterMenuComponent({ onApplyFilters }) {
 
     // Chama a função de filtro automaticamente na montagem
     useEffect( () => {
+        loadSpeciesList();
         const initialUrl = onGetData();
         onApplyFilters(initialUrl); // Chama a função de filtro com os valores iniciais
     }, []); // [] garante que será executado apenas na montagem
@@ -95,6 +113,25 @@ function FilterMenuComponent({ onApplyFilters }) {
                         <option value="">Todos</option>
                         <option value="MALE">Masculino</option>
                         <option value="FEMALE">Feminino</option>
+                    </select>
+                </div>
+
+                {/* Filtro :: Specie */}
+                <div className="filter__group filter__item">
+                    <label htmlFor="species">Espécie</label>
+                    <select 
+                        id="species" 
+                        value={selectedSpecie || ""} 
+                        onChange={(e) => setSelectedSpecie(e.target.value || null)}
+                    >
+                        <option value="">Todos</option>
+
+                        {
+                            speciesList.map( (specie, index) => (
+                                <option value={specie} key={index}>{specie.toLowerCase()}</option>
+                            ))
+                        }
+
                     </select>
                 </div>
 

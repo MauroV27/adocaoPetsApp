@@ -39,12 +39,13 @@ export function getPetById(req, res) {
 }
 
 export async function getAll(req, res) {
-  const { limit = 10, offset = 0, size, personality, gender, status } = req.query;
+  const { limit = 10, offset = 0, size, personality, gender, status, specie } = req.query;
 
   const filters = {};
   if (size) filters.size = size;
   if (personality) filters.personality = personality;
   if (gender) filters.gender = gender;
+  if (specie) filters.specie = specie;
   if (status) filters.status = status;
 
   return await prismaClient.pet.findMany({
