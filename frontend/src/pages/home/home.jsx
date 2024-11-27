@@ -1,17 +1,31 @@
 import PetCardComponent from "../../components/pet-card/pet-card";
 import { FaPaw } from "react-icons/fa";
 import "./home.css";
+import { useState, useEffect } from "react";
+import { getPets } from "../../api/petRoutes";
 
 function HomePageComponent() {
 
-    const listPets = [
-        { id: 1, name:"Test 1", description: 'Descrição do Card 1', link: "/pets", specie: "CAT", gender: "MALE" },
-        { id: 2, name:"Test 2", description: 'Descrição do Card 2', link: "/pets", specie: "DOG", gender: "FEMALE" },
-        { id: 3, name:"Test 3", description: 'Descrição do Card 3', link: "/pets", specie: "BIRD", gender: "MALE" },
-        { id: 4, name:"Test 4", description: 'Descrição do Card 4', link: "/pets", specie: "CAT", gender: "FEMALE" },
-        { id: 5, name:"Test 5", description: 'Descrição do Card 5', link: "/pets", specie: "DOG", gender: "MALE" },
-        { id: 6, name:"Test 6", description: 'Descrição do Card 6', link: "/pets", specie: "CAT", gender: "MALE" },
-    ];
+    const [listPets, setListPets] = useState([]);
+
+    const loadPets = async () => {
+        const resp = await getPets(6, 0)
+            .then( resp => {
+                return resp;
+            }).catch( error => {
+                return {
+                    message : error.message,
+                    data : [],
+                    status : error.status
+                };
+            });
+
+        setListPets( [... await resp.data] );
+    };
+
+    useEffect( () => {
+        loadPets();
+    }, []); 
 
     return (
         <div className="home__container">

@@ -8,8 +8,8 @@ function ListPetsPage() {
     const [listPets, setListPets] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const loadPets = async (listPetsFromQuery) => {
-        setListPets([...listPetsFromQuery]);
+    const loadPets = async ( listPetsFromQuery ) => {
+        setListPets([... await listPetsFromQuery]);
         setLoading(true);
     };
 
@@ -26,16 +26,22 @@ function ListPetsPage() {
 
                 {loading ? (
  
-                    <div className="card__list__pets__section">
-                    {
-                        listPets.map((pet, index) => (
-                            <PetCardComponent 
-                                key={index}
-                                pet={{ ...pet, link: "/" }}
-                            />                    
-                        ))
-                    }
-                    </div>
+                    listPets.length == 0 ? (
+                        <p>Nem um pet foi encontrado com essas características</p>
+                    ) : (
+                        <div className="card__list__pets__section">
+                        {
+                            listPets.map((pet, index) => (
+                                <PetCardComponent 
+                                    key={index}
+                                    pet={{ ...pet, link: "/" }}
+                                />                    
+                            ))
+                        }
+                        
+                        </div>
+                    )
+
                 ):( 
                     <p>Carregando...</p>
                 )}

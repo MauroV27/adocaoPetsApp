@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getPets } from '../../api/petRoutes.js';
 import "./filter-menu.css";
 
 function FilterMenuComponent({ onApplyFilters }) {
@@ -10,43 +11,33 @@ function FilterMenuComponent({ onApplyFilters }) {
 
     
     // Gerar a URL com os filtros aplicados
-    const onGetData = () => {
+    const onGetData = async () => {
         
-        const baseURL = "https://example.com/api/pets";
         const limit = 10; // Pode ajustar conforme necessário
         const offset = 0; // Inicialmente zero, pode ser ajustado para paginação
-
-        const params = new URLSearchParams({
+        
+        const pets = await getPets(          
             limit,
             offset,
-            size: size || "UNDEFINED",
-            personality: personality || "UNDEFINED",
-            gender: gender || "UNDEFINED",
+            size || '',
+            personality || '',
+            gender || '', 
+        ).then( resp => {
+            return resp;
+        }).catch( error => {
+            return {
+                message : error.message,
+                data : [],
+                status : error.status
+            };
         });
 
-        const url = `${baseURL}?${params.toString()}`;  
-        
-        const pets = [
-            { id: 1,    name: "Test 1",     description: 'Descrição do Card 1',     link: "/pets", specie: "CAT", gender: "MALE"},
-            { id: 2,    name: "Test 2",     description: 'Descrição do Card 2',     link: "/pets", specie: "DOG", gender: "FEMALE"},
-            { id: 3,    name: "Test 3",     description: 'Descrição do Card 3',     link: "/pets", specie: "CAT", gender: "MALE"},
-            { id: 4,    name: "Test 4",     description: 'Descrição do Card 4',     link: "/pets", specie: "RABBIT", gender: "MALE"},
-            { id: 5,    name: "Test 5",     description: 'Descrição do Card 5',     link: "/pets", specie: "CAT", gender: "FEMALE"},
-            { id: 6,    name: "Test 6",     description: 'Descrição do Card 6',     link: "/pets", specie: "DOG", gender: "MALE"},
-            { id: 7,    name: "Test 7",     description: 'Descrição do Card 3',     link: "/pets", specie: "DOG", gender: "MALE"},
-            { id: 8,    name: "Test 8",     description: 'Descrição do Card 4',     link: "/pets", specie: "SNAKE", gender: "UNDEFINED"},
-            { id: 9,    name: "Test 9",     description: 'Descrição do Card 5',     link: "/pets", specie: "DOG", gender: "MALE"},
-            { id: 10,   name: "Test a",      description: 'Descrição do Card 6',     link: "/pets", specie: "DOG", gender: "MALE"},
-            { id: 11,   name: "Test b",      description: 'Descrição do Card 6',     link: "/pets", specie: "BIRD", gender: "UNDEFINED"},
-            { id: 12,   name: "Test c",      description: 'Descrição do Card 6',     link: "/pets", specie: "CAT", gender: "FEMALE"},
-        ];
-
-        return pets;
-
+        const data = await pets.data;
+        return [...data];
     };
 
     // Chama a função de filtro automaticamente na montagem
-    useEffect(() => {
+    useEffect( () => {
         const initialUrl = onGetData();
         onApplyFilters(initialUrl); // Chama a função de filtro com os valores iniciais
     }, []); // [] garante que será executado apenas na montagem
