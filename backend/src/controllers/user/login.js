@@ -53,6 +53,11 @@ export async function login(req, res) {
         .json({ 
             success: true, 
             message: 'Login successfully', 
-            token: createUserToken 
+            token: createUserToken, 
+            user : {
+                id: user.id, 
+                name: user.name, 
+                role: user.role
+            } 
     });
 }
