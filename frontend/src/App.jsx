@@ -6,6 +6,8 @@ import MenuBarComponent from './components/menu-bar/menu-bar';
 import FooterComponent from './components/footer/footer';
 import ListPetsPage from './pages/list-pets/list-pets';
 import PetDetailPage from './pages/pet-page/pet-page';
+import LoginPage from './pages/user/login/login';
+import RegisterUserPage from './pages/user/register-user/register-user';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
                 <Route path="/about" element={<p>Sobre...</p>} />
                 <Route path='/adoption' element={<ListPetsPage />} />
                 <Route path="/pet/:id" element={<PetDetailPage />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/register' element={<RegisterUserPage />} />
             </Routes>
 
             <FooterComponent />
