@@ -7,7 +7,7 @@ import { FaQuestion } from 'react-icons/fa';
 
 function PetCardComponent({pet}) {
 
-    const { image, name, gender, description, specie, link } = pet;
+    const { image, name, gender, description, specie, id } = pet;
 
     const specieIcon = {
         "CAT" : <PiCatFill />,
@@ -47,7 +47,7 @@ function PetCardComponent({pet}) {
     }
 
     return (
-        <Link to={link} className="card__link">
+        <Link to={'/pet/' + id} className="card__link">
             <div className="card">
                 <img 
                     src={specie in placeHolderImage ? (placeHolderImage[specie]) : (placeHolderImage["UNDEFINED"])} 
