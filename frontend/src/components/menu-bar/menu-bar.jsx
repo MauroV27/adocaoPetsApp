@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useGlobalData } from '../../global';
 import './menu-bar.css';
 
 function MenuBarComponent() {
 
     const [userLogged, setUserLogged] = useState(false);
     const [userRole, setUserRole] = useState("USER");
+    
+    const { globalData, setGlobalData } = useGlobalData();
+
+    const getDataFromGlocalComponent = async () => {
+
+        setUserLogged( await globalData.token ? true : false );
+        setUserRole( await globalData.role || "USER" );
+
+    };
+
+    getDataFromGlocalComponent();
 
     return ( 
         <nav className="menu-bar__container">
