@@ -8,6 +8,7 @@ import ListPetsPage from './pages/list-pets/list-pets';
 import PetDetailPage from './pages/pet-page/pet-page';
 import LoginPage from './pages/user/login/login';
 import RegisterUserPage from './pages/user/register-user/register-user';
+import UserProfilePage from './pages/user/profile/profile';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/pet/:id" element={<PetDetailPage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/register' element={<RegisterUserPage />} />
+                <Route path='/profile' element={<UserProfilePage />} />
             </Routes>
 
             <FooterComponent />
