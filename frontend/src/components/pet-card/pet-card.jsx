@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom';
 import './pet-card.css';
 import { FaQuestion } from 'react-icons/fa';
 
+// import images from assets : 
+import catImage from '../../assets/pets-images/cat.png';
+import dogImage from '../../assets/pets-images/dog.png';
+import birdImage from '../../assets/pets-images/bird.png';
+import rabbitImage from '../../assets/pets-images/rabbit.png';
+import undefiedImage from '../../assets/pets-images/undefined-300.png';
+
 function PetCardComponent({pet}) {
 
     const { image, name, gender, description, specie, id } = pet;
@@ -39,11 +46,11 @@ function PetCardComponent({pet}) {
 
     // Placeholder images to represent pet specie
     const placeHolderImage = {
-        "CAT" : "https://catfriendly.com/wp-content/uploads/2016/11/Cat-Lying-Down-Red-coloring-Istock-300x300.jpg",
-        "DOG" : "https://dogtowndogtraining.com/wp-content/uploads/2012/06/300x300-061-e1340955308953.jpg",
-        "BIRD" : "https://abcbirds.org/wp-content/uploads/2022/04/Eastern-Bluebird-female.-Photo-by-Steve-BylandShutterstock..png",
-        "RABBIT" : "https://cdn.roysfarm.com/wp-content/uploads/Rabbit.jpg",
-        "UNDEFINED" : "https://via.placeholder.com/300",
+        "GATO" : catImage,
+        "DOG" : dogImage,
+        "BIRD" : birdImage,
+        "RABBIT" : rabbitImage,
+        "UNDEFINED" : undefiedImage,
     }
 
     return (
