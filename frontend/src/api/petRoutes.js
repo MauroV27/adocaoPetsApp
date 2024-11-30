@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { baseURL } from './baseURL.js';
 
+axios.defaults.withCredentials = true; // Permitir envio de cookies em requisições
+
 const petsURL = baseURL + "/pets";
 
 /** Pet data that returnsffrom request
@@ -89,7 +91,7 @@ export const getSpecies = async (status = "AVAILABLE") => {
  * @returns {PetRespose}
  */
 export const createPets = async (data) => {
-    return await axios.post(petsURL, {data});
+    return await axios.post(petsURL, data);
 };
 
 

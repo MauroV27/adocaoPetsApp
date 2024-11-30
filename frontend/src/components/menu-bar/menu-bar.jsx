@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalData } from '../../global';
 import './menu-bar.css';
@@ -34,7 +34,7 @@ function MenuBarComponent() {
 
                 { userRole == "ADMIN" ? (
                     <li className='btn-to'>
-                        <Link to="/dashbord">Dashbord</Link >
+                        <Link to="/dashboard">Dashboard</Link >
                     </li>
                 ) : (<></>)}
             </ul>

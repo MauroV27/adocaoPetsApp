@@ -1,0 +1,163 @@
+/* src/components/Dashboard.css */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--primary);
+    padding: 0px;
+    color: var(--on-primary);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    cursor: pointer;
+    padding: 15px;
+    background-color: var(--primary);
+    transition: background-color 0.3s ease;
+    color: #d3d3d3;
+    font-size: 1.2em;
+    /* Light gray color for names */
+}
+
+.sidebar li:hover {
+    background-color: #34495e;
+    width: 100%;
+}
+
+.sidebar li.active {
+    background-color: var(--secondary);
+}
+
+.sidebar .icon {
+    margin-right: 10px;
+}
+
+.sidebar a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebar a .icon {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff9e1;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--on-secondary);
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: var(--secondary);
+}
+
+.logo {
+    width: 200px;
+}
+
+.search-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: var(--secondary);
+}
+
+.pagination span {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: var(--surface);
+    color: var(--on-surface);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.adoption-form input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.adoption-form button {
+    padding: 10px;
+    background-color: #6dbf99;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

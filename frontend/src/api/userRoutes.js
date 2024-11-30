@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { baseURL } from './baseURL.js';
 
+axios.defaults.withCredentials = true; // Permitir envio de cookies em requisições
+
 /**
  * ## Create user account :
  * @param {(
@@ -19,7 +21,7 @@ import { baseURL } from './baseURL.js';
  * )} 
  */
 export const singup  = async (body) => {
-    return await axios.post(baseURL + "/singup", body);
+    return await axios.post(baseURL + "/singup", {body});
 };
 
 
@@ -82,8 +84,8 @@ export const getUserById  = async (id, headers) => {
 *      }[] 
 * )} List of users
  */
-export const getUsers  = async (limit = 10, offset = 0, headers) => {
-    return await axios.get($`${baseURL}/users?limit=${limit}&offset=${offset}`);
+export const getUsers  = async (limit = 10, offset = 0, name = '',headers) => {
+    return await axios.get(`${baseURL}/users?limit=${limit}&offset=${offset}&name=${name}`, headers);
 };
 
 /**

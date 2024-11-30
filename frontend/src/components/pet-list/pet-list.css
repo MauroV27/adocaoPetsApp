@@ -1,0 +1,37 @@
+.pet-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    /* Diminuindo a largura do formulário */
+    margin: 0 auto;
+    /* Centralizando o formulário */
+}
+
+.form-title {
+    text-align: center;
+    /* Centralizando o título */
+}
+
+.pet-form input,
+.pet-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    /* Garantindo que os inputs ocupem toda a largura do formulário */
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: var(--secondary);
+    /* Ajuste a cor conforme necessário */
+}

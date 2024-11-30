@@ -9,6 +9,7 @@ import PetDetailPage from './pages/pet-page/pet-page';
 import LoginPage from './pages/user/login/login';
 import RegisterUserPage from './pages/user/register-user/register-user';
 import UserProfilePage from './pages/user/profile/profile';
+import Dashboard from './pages/dashboard/dashboard';
 import AboutPage from './pages/about/about';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/" element={<HomePageComponent />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path='/adoption' element={<ListPetsPage />} />
+                <Route path='/dashboard' element={<Dashboard />} />
                 <Route path="/pet/:id" element={<PetDetailPage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/register' element={<RegisterUserPage />} />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { IoMdMale, IoMdFemale } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import './pet-card.css';
