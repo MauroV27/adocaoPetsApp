@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { getPets } from "../../api/petRoutes";
 
 import bannerImage from '../../assets/banner-image-home.jpg';
+import { Link } from "react-router-dom";
 
 function HomePageComponent() {
 
@@ -36,7 +37,7 @@ function HomePageComponent() {
                 <div className="hero__content">
                     <h1>Bem vindo(a) a <span className="title__hero__emphasis">Adoção Tech</span></h1>
                     <p>Conectando pessoas com adoráveis pets</p>
-                    <button className="hero__button">Saiba Mais</button>
+                    <Link to="/about" className="hero__button">Saiba Mais</Link>
                 </div>
                 <div className="hero__image">
                     <img
