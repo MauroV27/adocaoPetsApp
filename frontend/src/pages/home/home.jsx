@@ -4,6 +4,8 @@ import "./home.css";
 import { useState, useEffect } from "react";
 import { getPets } from "../../api/petRoutes";
 
+import bannerImage from '../../assets/banner-image-home.jpg';
+
 function HomePageComponent() {
 
     const [listPets, setListPets] = useState([]);
@@ -38,7 +40,7 @@ function HomePageComponent() {
                 </div>
                 <div className="hero__image">
                     <img
-                        src="https://via.placeholder.com/600x400"
+                        src={bannerImage}
                         alt="Imagem da Hero"
                     />
                 </div>
