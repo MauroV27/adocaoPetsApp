@@ -1,11 +1,17 @@
 import { prismaClient } from "../../database/prismaClient.js";
 
 export async function getAll(req, res) {
-	const { limit = 10, offset = 0 } = req.query;
-
+	const { limit = 10, offset = 0, name = '' } = req.query;
+  const whereClause = name ? {
+    name: {
+      contains: name,
+      mode: 'insensitive' // Para pesquisa case-insensitive
+    }
+  } : {};
 	await prismaClient.user.findMany({
 		skip: parseInt(offset),
 		take: parseInt(limit),
+		where: whereClause,
 		select: {
 			id: true,
 			name: true,
@@ -13,6 +19,8 @@ export async function getAll(req, res) {
 			phone: true,
 			address: true,
 			role: true,
+			created_at: true,
+			Adoption: true,
 		},
 	})
 		.then((users) => 
