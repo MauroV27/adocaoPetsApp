@@ -60,7 +60,7 @@ export const login  = async (body) => {
  * )}
  */
 export const getUserById  = async (id, headers) => {
-    return await axios.get(`${baseURL}/user/${id}`, {}, headers);
+    return await axios.get(`${baseURL}/user/${id}`, headers);
 };
 
 

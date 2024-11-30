@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalData } from '../../global';
 import './menu-bar.css';
@@ -17,7 +17,9 @@ function MenuBarComponent() {
 
     };
 
-    getDataFromGlocalComponent();
+    useEffect( () => {
+        getDataFromGlocalComponent();
+    }, [globalData])
 
     return ( 
         <nav className="menu-bar__container">
@@ -45,7 +47,7 @@ function MenuBarComponent() {
                         </li>
                     ) : (
                         <li className='btn-to'>
-                            <Link to="/">Perfil</Link >
+                            <Link to="/profile">Perfil</Link >
                         </li>
                     )
                 }

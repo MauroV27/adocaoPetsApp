@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPetById } from '../../api/petRoutes';
+import { IoIosInformationCircleOutline } from "react-icons/io";
 import './pet-page.css';
+import { getSpecieData, getGenderDescription, getPetStatus, getPetSize, getPetPersonality } from '../../constant/petClassification';
 
 function PetDetailPage() {
 
     const { id } = useParams(); // Pega o ID da URL
     const [ pet, setPet ] = useState({});
+
+    function calculateAge(dateString) {
+        const birthDate = new Date(dateString);
+        const today = new Date();
+    
+        let years = today.getFullYear() - birthDate.getFullYear();
+        let months = today.getMonth() - birthDate.getMonth();
+    
+        // Ajusta se o mês atual for anterior ao mês de nascimento
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+    
+        return {
+            years,
+            months
+        };
+    }   
 
     const loadPetData = async () => {
         const resp = await getPetById(id)
@@ -23,20 +44,21 @@ function PetDetailPage() {
         }
 
         const data = await resp.data;
-        
-        // Placeholder images to represent pet specie
-        const placeHolderImage = {
-            "CAT" : "https://catfriendly.com/wp-content/uploads/2016/11/Cat-Lying-Down-Red-coloring-Istock-300x300.jpg",
-            "DOG" : "https://dogtowndogtraining.com/wp-content/uploads/2012/06/300x300-061-e1340955308953.jpg",
-            "BIRD" : "https://abcbirds.org/wp-content/uploads/2022/04/Eastern-Bluebird-female.-Photo-by-Steve-BylandShutterstock..png",
-            "RABBIT" : "https://cdn.roysfarm.com/wp-content/uploads/Rabbit.jpg",
-            "UNDEFINED" : "https://via.placeholder.com/300",
-        }
-
         const specie = data.specie;
-        data.image = specie in placeHolderImage ? (placeHolderImage[specie]) : (placeHolderImage["UNDEFINED"]);
         
-        setPet( data );
+        const specieDescription = getSpecieData(specie);
+        const age = calculateAge(data.dob);
+
+        setPet( {...data, 
+            specie: specieDescription.description,
+            image: specieDescription.image, 
+            age: `${age.years} anos e ${age.months} meses`,
+            dob: new Date(data.dob).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            })
+        } );
     };
 
     useEffect( () => {
@@ -56,15 +78,20 @@ function PetDetailPage() {
                     <ul>
                         {/* <li><strong>ID:</strong> {pet.id}</li> */}
                         <li><strong>Espécie:</strong> {pet.specie}</li>
-                        <li><strong>Data de Nascimento:</strong> {pet.dob}</li>
+                        <li>
+                            <strong>Idade:</strong> {pet.age} 
+                            <span><IoIosInformationCircleOutline 
+                                title={`${pet.name} nasceu no dia ${pet.dob}`}
+                            /></span>
+                        </li>
                         <li><strong>Descrição:</strong> {pet.description}</li>
-                        <li><strong>Raça:</strong> {pet.breed == null ? "UNDEFINED" : pet.breed}</li>
-                        <li><strong>Gênero:</strong> {pet.gender}</li>
-                        <li><strong>Status:</strong> {pet.status}</li>
-                        <li><strong>Tamanho:</strong> {pet.size}</li>
-                        <li><strong>Personalidade:</strong> {pet.personality}</li>
+                        <li><strong>Raça:</strong> {pet.breed == null ? "Não informada" : pet.breed}</li>
+                        <li><strong>Gênero:</strong> {getGenderDescription(pet.gender)}</li>
+                        <li><strong>Status:</strong> {getPetStatus(pet.status)}</li>
+                        <li><strong>Tamanho:</strong> {getPetSize(pet.size)}</li>
+                        <li><strong>Personalidade:</strong> {getPetPersonality(pet.personality)}</li>
                     </ul>
-                </div>
+                </div>  
 
             </div>
         ) : (

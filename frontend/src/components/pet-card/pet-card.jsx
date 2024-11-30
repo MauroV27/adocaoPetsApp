@@ -1,29 +1,16 @@
 import React from 'react';
-import { IoMdMale, IoMdFemale, IoMdStar } from "react-icons/io";
-import { PiCatFill, PiDogFill, PiBirdFill, PiRabbitFill, PiQuestionFill } from "react-icons/pi";
+import { IoMdMale, IoMdFemale } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import './pet-card.css';
 import { FaQuestion } from 'react-icons/fa';
+
+import { getSpecieData, getGenderDescription } from '../../constant/petClassification';
 
 function PetCardComponent({pet}) {
 
     const { image, name, gender, description, specie, id } = pet;
 
-    const specieIcon = {
-        "CAT" : <PiCatFill />,
-        "DOG" : <PiDogFill />,
-        "BIRD" : <PiBirdFill />,
-        "RABBIT" : <PiRabbitFill />,
-        "UNDEFINED" : <IoMdStar />
-    }
-
-    const specieIconDescription = {
-        "CAT" : "Gato",
-        "DOG" : "Cachorro",
-        "BIRD" : "Pássaro",
-        "RABBIT" : "Coelho",
-        "UNDEFINED" : `Animal da espécie : ${(specie + '').toLowerCase()}`
-    }
+    const petDataDescription = getSpecieData(specie);
 
     const genderIcon = {
         "FEMALE" : <IoMdFemale />,
@@ -31,26 +18,11 @@ function PetCardComponent({pet}) {
         "UNDEFINED" : <FaQuestion />,
     }
 
-    const genderIconDescription = {
-        "FEMALE" : "Fêmea",
-        "MALE" : "Macho",
-        "UNDEFINED" : "Sexo do pet é desconhecido"
-    }
-
-    // Placeholder images to represent pet specie
-    const placeHolderImage = {
-        "CAT" : "https://catfriendly.com/wp-content/uploads/2016/11/Cat-Lying-Down-Red-coloring-Istock-300x300.jpg",
-        "DOG" : "https://dogtowndogtraining.com/wp-content/uploads/2012/06/300x300-061-e1340955308953.jpg",
-        "BIRD" : "https://abcbirds.org/wp-content/uploads/2022/04/Eastern-Bluebird-female.-Photo-by-Steve-BylandShutterstock..png",
-        "RABBIT" : "https://cdn.roysfarm.com/wp-content/uploads/Rabbit.jpg",
-        "UNDEFINED" : "https://via.placeholder.com/300",
-    }
-
     return (
         <Link to={'/pet/' + id} className="card__link">
             <div className="card">
                 <img 
-                    src={specie in placeHolderImage ? (placeHolderImage[specie]) : (placeHolderImage["UNDEFINED"])} 
+                    src={petDataDescription.image} 
                     alt={name} 
                     className="card__image" 
                 />
@@ -60,13 +32,13 @@ function PetCardComponent({pet}) {
 
                         <div className="pet__data__description">
                             <span className="pet__icon__style"
-                                title={specie in specieIconDescription ? specieIconDescription[specie]: specieIconDescription["UNDEFINED"]}
+                                title={petDataDescription.description}
                                 >
-                                {specie in specieIconDescription ? specieIcon[specie]: specieIcon["UNDEFINED"]}
+                                {petDataDescription.icon}
                             </span>
 
                             <span className="pet__icon__style"
-                                title={gender ? genderIconDescription[gender]: genderIconDescription["UNDEFINED"]}
+                                title={getGenderDescription(gender)}
                                 >
                                 {gender ? genderIcon[gender]: genderIcon["UNDEFINED"]}
                             </span>
