@@ -19,18 +19,45 @@ export async function login(req, res) {
     })
 
     if ( !user ) {
-        return res.status(401).json({ success: false, message: 'Login failed, invalid credentials.'});
+        return res
+        .status(401)
+        .json({ 
+            success: false, 
+            message: 'Login failed, invalid credentials.'
+        });    
     }
 
     // Comparar a senha fornecida com a senha hash armazenada
     const isPasswordValid = await compare(password, user.password);
 
     if (!isPasswordValid) {
-        return res.status(401).json({ success: false, message: 'Login failed, invalid credentials.'});
+        return res
+            .status(401)
+            .json({ 
+                success: false, 
+                message: 'Login failed, invalid credentials.'
+            });
     }
 
     const createUserToken = createJWTToken({id : user.id});
 
-    // Login bem-sucedido
-    return res.status(200).json({ success: true, message: 'Login successfully', token: createUserToken });
+    // Login bem-sucedido    
+    res.cookie("jwt_token", createUserToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 2 * 60 * 60 * 1000,
+    });
+
+    return res
+        .status(200)
+        .json({ 
+            success: true, 
+            message: 'Login successfully', 
+            token: createUserToken, 
+            user : {
+                id: user.id, 
+                name: user.name, 
+                role: user.role
+            } 
+    });
 }

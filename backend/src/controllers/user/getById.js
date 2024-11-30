@@ -9,7 +9,7 @@ export async function getById(req, res) {
 
     const userId = req.params.id;
     const { id } = req.user;
-    const { access } = req.access;
+    const access = req.access;
 
     if ( access != "ADMIN" && id != userId ){
         return res.status(403).json({

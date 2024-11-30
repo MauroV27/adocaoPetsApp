@@ -1,8 +1,7 @@
 import pkg from 'jsonwebtoken';
 const { verify, sign } = pkg;
 
-import { PrismaClient } from "@prisma/client";
-const prismaClient = new PrismaClient();
+import { prismaClient } from '../database/prismaClient.js';
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
@@ -30,7 +29,8 @@ async function getUserInToke( id ) {
     .then( user => { return user })
     .catch( error => {
         // TODO : Handle error message
-        return res.status(500).json({ message : error.message })
+        return error;
+        // return res.status(500).json({ message : error.message })
     });
     return currentUser;    
 }
@@ -39,7 +39,7 @@ export async function authAdminMiddleware(req, res, next) {
     const token = getToken(req);
 
     if (!token) {
-        return res.status(401).json({ message: 'Token não fornecido' });
+        return res.status(401).json({ message: 'Token not provided' });
     }
  
     try {
@@ -57,7 +57,7 @@ export async function authAdminMiddleware(req, res, next) {
         next();
     
     } catch (error) {
-        return res.status(403).json({ message: 'Token inválido ou expirado' });
+        return res.status(403).json({ message: 'Invalid or expired token' });
     }
 }
 
@@ -66,7 +66,7 @@ export async function authMiddleware(req, res, next) {
     const token = getToken(req);
 
     if (!token) {
-        return res.status(401).json({ message: 'Token não fornecido' });
+        return res.status(401).json({ message: 'Token not provided' });
     }
     
     try {
@@ -75,6 +75,10 @@ export async function authMiddleware(req, res, next) {
         const { id } = decoded.data;
 
         const currentUser = await getUserInToke( id );
+
+        if ( !currentUser && currentUser.error ){
+            return res.status(500).json({ message : currentUser.error.message })
+        }
 
         if (!currentUser || currentUser.role === 'ADMIN') {
             req.access = "ADMIN";
@@ -86,7 +90,7 @@ export async function authMiddleware(req, res, next) {
         next();
     
     } catch (error) {
-        return res.status(403).json({ message: 'Token inválido ou expirado' });
+        return res.status(403).json({ message: 'Invalid or expired token' });
     }
 }
 

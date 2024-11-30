@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prismaClient = new PrismaClient();
+import { prismaClient } from "../database/prismaClient.js";
 
 export async function create(req, res) {
   const { adoptionDate, petId, userId } = req.body;
