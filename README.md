@@ -29,6 +29,10 @@ Este projeto consiste em uma API para um sistema de adoção de pets, que permit
 Tecnologias Utilizadas ⚙️
 -------------------------
 
+![My Skills](https://skillicons.dev/icons?i=nodejs,prisma,express,postgres,docker,js,jest,react,vite&theme=dark)
+
+#### Backend : 
+
 *   **Node.js**: Plataforma JavaScript do lado do servidor para alta performance e escalabilidade.
 *   **Express**: Framework minimalista para criação de APIs RESTful com roteamento eficiente.
 *   **Prisma**: ORM moderno para manipulação de dados no PostgreSQL.
@@ -37,9 +41,14 @@ Tecnologias Utilizadas ⚙️
 *   **bcrypt**: Para criptografar senhas e garantir a segurança dos dados.
 *   **Swagger**: Para documentação interativa da API.
 *   **Jest**: Framework de testes para garantir a qualidade da aplicação.
-<br/>
 
-![My Skills](https://skillicons.dev/icons?i=nodejs,prisma,express,postgres,docker,express,js,jest,nodejs,prisma&theme=dark)
+#### Frontend : 
+*   **React.js**: Biblioteca para a criação de interfaces de usuário em páginas web;
+*   **Vite**: Ferramenta para auxiliar no desenvolvimento, gerenciando o ambiente de desenvolvimento;
+*   **Axios** : Biblioteca usada para fazer requisições HTTP para o Node.js;
+*   **React-router-dom** : Para trabalhar com rotas com o React;
+*   **React-icons** : Biblioteca de ícones para usar com o React;
+
 
 * * *
 
